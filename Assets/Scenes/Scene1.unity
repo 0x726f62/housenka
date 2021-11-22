@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  bodyPartPrefab: {fileID: -3738089339001599121, guid: 2ac9fd0c5799aac199f0e84c59bca90b, type: 3}
 --- !u!212 &2035571446
 SpriteRenderer:
   m_ObjectHideFlags: 0

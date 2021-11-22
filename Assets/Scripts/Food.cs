@@ -20,6 +20,5 @@ public class Food : MonoBehaviour
     void beEaten() {
             Destroy(gameObject);
             FindObjectOfType<Stonozka> ().onEatenFood -= beEaten;
-            //TODO create a new food
     }
 }

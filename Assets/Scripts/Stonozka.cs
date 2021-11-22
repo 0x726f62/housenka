@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Stonozka : MonoBehaviour
 {
@@ -8,11 +9,16 @@ public class Stonozka : MonoBehaviour
     public System.Action onEatenFood;
     float screenSizeInUnits;
     Vector2 prevDistance = Vector2.zero;
+    public BodyPart bodyPartPrefab;
+
+    float halfCurrentObjectWidth;
+    
+    List<GameObject> bodyPartsList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        float halfCurrentObjectWidth = transform.localScale.x / 2f;
+        halfCurrentObjectWidth = transform.localScale.x / 2f;
         screenSizeInUnits = Camera.main.aspect * Camera.main.orthographicSize + halfCurrentObjectWidth;
         transform.Translate(Vector2.zero);
     }
@@ -57,8 +63,17 @@ public class Stonozka : MonoBehaviour
                 //TODO need to diff between food instances
                 onEatenFood();
             }
-            
+            AddBodyPart();
             print("Food hit");
+
+
         }
+    }
+
+    void AddBodyPart() {
+        Vector2 spawnPosition = new Vector2(transform.position.x + 2*halfCurrentObjectWidth, transform.position.y);
+        BodyPart instance = Instantiate<BodyPart>(bodyPartPrefab, spawnPosition, Quaternion.identity);
+        instance.SetFollower(bodyPartsList.Last());
+        bodyPartsList.Add(instance.gameObject);
     }
 }
